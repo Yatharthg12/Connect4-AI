@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Layout */
+.game-container {
+    display: flex;
+    gap: 40px;
+}
+
+/* Sidebar */
+.sidebar {
+    background: #ffffff10;
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    width: 200px;
+}
+
+.sidebar button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #ffffff20;
+    color: white;
+    font-weight: bold;
+}
+
+.sidebar button:hover {
+    background: #ffffff40;
+}
+
+/* Turn Indicator */
+.turn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition: background 0.3s;
+}
+
+.red {
+    background: red;
+}
+
+.yellow {
+    background: yellow;
+}
+
+/* Board */
+.board-wrapper {
+    position: relative;
+    background: #0044cc;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    padding: 20px;
+    display: inline-block;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(7, 90px);
+    grid-template-rows: repeat(6, 90px);
+}
+
+.cell {
+    width: 90px;
+    height: 90px;
+    position: relative;
+}
+
+/* Hole cut-out */
+.cell::before {
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background: #001f5c;
+    border-radius: 50%;
+    top: 7.5px;
+    left: 7.5px;
+    z-index: 1;
+}
+
+/* Glossy 3D Disk */
+.disk {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    position: absolute;
+    left: 7.5px;
+    top: 7.5px;
+    z-index: 2;
+    background: radial-gradient(circle at 30% 30%, #ff6666, #cc0000);
+    box-shadow:
+        inset -6px -6px 10px rgba(0,0,0,0.4),
+        inset 4px 4px 8px rgba(255,255,255,0.3),
+        0 6px 10px rgba(0,0,0,0.5);
+    transition: transform 0.4s cubic-bezier(.25,.8,.25,1);
+}
+
+.disk.yellow {
+    background: radial-gradient(circle at 30% 30%, #ffff66, #e6c200);
+}
+
+/* SVG overlay perfectly matches grid */
+.win-line {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 630px;   /* 7 * 90 */
+    height: 540px;  /* 6 * 90 */
+    pointer-events: none;
+    z-index: 5;
+}
+
+.win-line line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 0.6s ease forwards;
+}
+
+@keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    padding: 50px 60px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    animation: scaleUp 0.3s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #0044cc;
+    color: white;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background: #002e88;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes scaleUp {
+    from {transform: scale(0.8);}
+    to {transform: scale(1);}
+}
+
+
+.preview {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+
+.hidden {
+    display: none;
+}
