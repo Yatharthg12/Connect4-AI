@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+
+    <div class="sidebar">
+        <h2>Turn</h2>
+        <div id="turnIndicator" class="turn red"></div>
+        <p id="turnText">Player 1</p>
+        <button onclick="resetGame()">Restart</button>
+
+        <div style="margin-top:20px;">
+            <label style="color:white;">Mode</label><br>
+            <select id="modeSelect" style="margin-top:5px;padding:6px;border-radius:8px;">
+                <option value="pvp">2 Players</option>
+                <option value="minimax">AI - Minimax</option>
+                <option value="alphabeta">AI - Alpha Beta</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="board-wrapper">
+        <div id="board"></div>
+        <svg id="winLine" class="win-line"></svg>
+    </div>
+
+</div>
+
+<div id="modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Game Over</h2>
+        <p id="winnerText"></p>
+        <button onclick="resetGame()">Restart</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
